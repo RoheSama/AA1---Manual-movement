@@ -175,12 +175,19 @@ namespace RobotController
         internal MyQuat Rotate(MyQuat currentRotation, MyVec axis, float angle)
         {
 
-            //todo: change this so it takes currentRotation, and calculate a new quaternion rotated by an angle "angle" radians along the normalized axis "axis"
-            return NullQ;
+            float halfAngle = angle / 2;
+            float sinHalfAngle = (float)Math.Sin(halfAngle);
+            float cosHalfAngle = (float)Math.Cos(halfAngle);
+
+            MyQuat rotationQuat;
+            rotationQuat.x = axis.x * sinHalfAngle;
+            rotationQuat.y = axis.y * sinHalfAngle;
+            rotationQuat.z = axis.z * sinHalfAngle;
+            rotationQuat.w = cosHalfAngle;
+
+            return rotationQuat;
 
         }
-
-
 
 
         //todo: add here all the functions needed
