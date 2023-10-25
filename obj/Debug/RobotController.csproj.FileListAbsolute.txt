@@ -4,3 +4,9 @@ E:\Trabajo\Classes Enti\Delivery1_Empty\RobotController\obj\Debug\RobotControlle
 E:\Trabajo\Classes Enti\Delivery1_Empty\RobotController\obj\Debug\RobotController.csproj.CoreCompileInputs.cache
 E:\Trabajo\Classes Enti\Delivery1_Empty\RobotController\obj\Debug\RobotController.dll
 E:\Trabajo\Classes Enti\Delivery1_Empty\RobotController\obj\Debug\RobotController.pdb
+D:\CDI\3r_Curs\1r_Quatri\Animacio\AA1-ManualMovement\AA1---Manual-movement\bin\Debug\RobotController.dll
+D:\CDI\3r_Curs\1r_Quatri\Animacio\AA1-ManualMovement\AA1---Manual-movement\bin\Debug\RobotController.pdb
+D:\CDI\3r_Curs\1r_Quatri\Animacio\AA1-ManualMovement\AA1---Manual-movement\obj\Debug\RobotController.csproj.AssemblyReference.cache
+D:\CDI\3r_Curs\1r_Quatri\Animacio\AA1-ManualMovement\AA1---Manual-movement\obj\Debug\RobotController.csproj.CoreCompileInputs.cache
+D:\CDI\3r_Curs\1r_Quatri\Animacio\AA1-ManualMovement\AA1---Manual-movement\obj\Debug\RobotController.dll
+D:\CDI\3r_Curs\1r_Quatri\Animacio\AA1-ManualMovement\AA1---Manual-movement\obj\Debug\RobotController.pdb
