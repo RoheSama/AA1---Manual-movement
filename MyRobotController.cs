@@ -33,6 +33,8 @@ namespace RobotController
 
         #region public methods
 
+        private float[] initiAngles;
+        private MyVec[] rotateAxis;
 
 
         public string Hi()
@@ -48,11 +50,12 @@ namespace RobotController
 
         public void PutRobotStraight(out MyQuat rot0, out MyQuat rot1, out MyQuat rot2, out MyQuat rot3) {
 
-            //todo: change this, use the function Rotate declared below
             rot0 = NullQ;
-            rot1 = NullQ;
-            rot2 = NullQ;
-            rot3 = NullQ;
+            rot0 = Rotate(rot0, rotateAxis[0], (float)Radians(initiAngles[0]));
+            rot1 = Rotate(rot0, rotateAxis[1], (float)Radians(initiAngles[1]));
+            rot2 = Rotate(rot1, rotateAxis[2], (float)Radians(initiAngles[2]));
+            rot3 = Rotate(rot2, rotateAxis[3], (float)Radians(initiAngles[3]));
+
         }
 
 
@@ -195,7 +198,10 @@ namespace RobotController
         #endregion
 
 
-
+        internal double Radians(double degree)
+        {
+            return (degree * (Math.PI / 180));
+        }
 
 
 
