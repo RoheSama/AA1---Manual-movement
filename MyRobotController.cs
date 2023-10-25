@@ -36,6 +36,28 @@ namespace RobotController
         private float[] initiAngles;
         private MyVec[] rotateAxis;
 
+        public MyRobotController()
+        {
+            initiAngles = new float[5];
+            initiAngles[0] = 74;
+            initiAngles[1] = -10;
+            initiAngles[2] = 80;
+            initiAngles[3] = 40;
+            initiAngles[4] = 0;
+
+            rotateAxis = new MyVec[5];
+            rotateAxis[0].x = 0;
+            rotateAxis[0].y = 1;
+            rotateAxis[0].z = 0;
+            rotateAxis[1].x = 1;
+            rotateAxis[1].y = 0;
+            rotateAxis[1].z = 0;
+            rotateAxis[3] = rotateAxis[2] = rotateAxis[1];
+            rotateAxis[4].x = 0;
+            rotateAxis[4].y = 1;
+            rotateAxis[4].z = 0;
+        }
+
 
         public string Hi()
         {
