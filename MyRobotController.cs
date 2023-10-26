@@ -38,6 +38,9 @@ namespace RobotController
 
         private float counter;
 
+        private static MyQuat twistQuat;
+        private static MyQuat swingQuat;
+
         public MyRobotController()
         {
             initiAngles = new float[5];
@@ -143,32 +146,46 @@ namespace RobotController
         public bool PickStudAnimVertical(out MyQuat rot0, out MyQuat rot1, out MyQuat rot2, out MyQuat rot3)
         {
 
-            bool myCondition = false;
-            //todo: add a check for your condition
+            condition1 = true;
 
-
-
-            while (myCondition)
+            if (condition2)
             {
-                //todo: add your code here
-
-
+                counter = 0;
+                condition2 = false;
             }
 
-            //todo: remove this once your code works.
-            rot0 = NullQ;
-            rot1 = NullQ;
-            rot2 = NullQ;
-            rot3 = NullQ;
 
-            return false;
+            if (counter <= 1)
+            {
+                rot0 = NullQ;
+                rot0 = Rotate(rot0, rotateAxis[0], (float)Radians(lerp(initiAngles[0], finalAngles[0], counter)));
+                rot1 = Rotate(rot0, rotateAxis[1], (float)Radians(lerp(initiAngles[1], finalAngles[1], counter)));
+                rot2 = Rotate(rot1, rotateAxis[2], (float)Radians(lerp(initiAngles[2], finalAngles[2], counter)));
+
+                swingQuat = Rotate(rot2, rotateAxis[3], (float)Radians(lerp(initiAngles[3], finalAngles[3], counter)));
+                twistQuat = Rotate(swingQuat, rotateAxis[4], (float)Radians(lerp(initiAngles[4], finalAngles[4], counter)));
+
+                rot3 = Multiply(twistQuat, swingQuat);
+
+                counter += 0.0025f;
+                return true;
+            }
+            else
+            {
+                rot0 = NullQ;
+                rot1 = NullQ;
+                rot2 = NullQ;
+                rot3 = NullQ;
+
+                return false;
+            }
         }
 
 
         public static MyQuat GetSwing(MyQuat rot3)
         {
             //todo: change the return value for exercise 3
-            return NullQ;
+            return Multiply(Inverse(twistQuat), rot3);
 
         }
 
@@ -176,7 +193,7 @@ namespace RobotController
         public static MyQuat GetTwist(MyQuat rot3)
         {
             //todo: change the return value for exercise 3
-            return NullQ;
+            return Multiply(rot3, Inverse(swingQuat));
 
         }
 
@@ -205,7 +222,7 @@ namespace RobotController
             }
         }
 
-        internal MyQuat Multiply(MyQuat q1, MyQuat q2) {
+        internal static MyQuat Multiply(MyQuat q1, MyQuat q2) {
 
             MyQuat returnQuat = NullQ;
 
@@ -217,22 +234,6 @@ namespace RobotController
             return returnQuat;
         }
 
-        //internal MyQuat Rotate(MyQuat currentRotation, MyVec axis, float angle)
-        //{
-
-        //    float halfAngle = angle / 2;
-        //    float sinHalfAngle = (float)Math.Sin(halfAngle);
-        //    float cosHalfAngle = (float)Math.Cos(halfAngle);
-
-        //    MyQuat rotationQuat;
-        //    rotationQuat.x = axis.x * sinHalfAngle;
-        //    rotationQuat.y = axis.y * sinHalfAngle;
-        //    rotationQuat.z = axis.z * sinHalfAngle;
-        //    rotationQuat.w = cosHalfAngle;
-
-        //    return rotationQuat;
-
-        //}
 
         internal MyQuat Rotate(MyQuat currentRotation, MyVec axis, float angle)
         {
@@ -253,6 +254,24 @@ namespace RobotController
         //todo: add here all the functions needed
 
         #endregion
+
+
+        internal static MyQuat Inverse(MyQuat _quat)
+        {
+            float magnitudeSquared = _quat.x * _quat.x + _quat.y * _quat.y + _quat.z * _quat.z + _quat.w * _quat.w;
+
+            float num = 1f / magnitudeSquared;
+
+            MyQuat result = new MyQuat
+            {
+                x = -_quat.x * num,
+                y = -_quat.y * num,
+                z = -_quat.z * num,
+                w = _quat.w * num
+            };
+
+            return result;
+        }
 
 
         internal double Radians(double degree)
