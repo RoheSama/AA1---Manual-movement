@@ -24,10 +24,6 @@ namespace RobotController
     }
 
 
-
-
-
-
     public class MyRobotController
     {
 
@@ -35,6 +31,7 @@ namespace RobotController
 
         private float[] initiAngles;
         private MyVec[] rotateAxis;
+        private float[] finalAngles;
 
         private bool condition1;
         private bool condition2;
@@ -61,6 +58,13 @@ namespace RobotController
             rotateAxis[4].x = 0;
             rotateAxis[4].y = 1;
             rotateAxis[4].z = 0;
+
+            finalAngles = new float[5];
+            finalAngles[0] = 40;
+            finalAngles[1] = -10;
+            finalAngles[2] = 90;
+            finalAngles[3] = 20;
+            finalAngles[4] = 90;
         }
 
 
@@ -83,6 +87,8 @@ namespace RobotController
             rot2 = Rotate(rot1, rotateAxis[2], (float)Radians(initiAngles[2]));
             rot3 = Rotate(rot2, rotateAxis[3], (float)Radians(initiAngles[3]));
 
+            condition1 = true;
+            condition2 = true;
         }
 
 
@@ -106,23 +112,27 @@ namespace RobotController
 
             if (counter <= 1)
             {
-                //todo: add your code here
+                rot0 = NullQ;
+                rot0 = Rotate(rot0, rotateAxis[0], (float)Radians(lerp(initiAngles[0], finalAngles[0], counter)));
+                rot1 = Rotate(rot0, rotateAxis[1], (float)Radians(lerp(initiAngles[1], finalAngles[1], counter)));
+                rot2 = Rotate(rot1, rotateAxis[2], (float)Radians(lerp(initiAngles[2], finalAngles[2], counter)));
+                rot3 = Rotate(rot2, rotateAxis[3], (float)Radians(lerp(initiAngles[3], finalAngles[3], counter)));
+
+                counter += 0.0025f;
+
+                return true;
+            }
+
+            else
+            {
                 rot0 = NullQ;
                 rot1 = NullQ;
                 rot2 = NullQ;
                 rot3 = NullQ;
 
-
-                return true;
+                return false;
             }
-
-            //todo: remove this once your code works.
-            rot0 = NullQ;
-            rot1 = NullQ;
-            rot2 = NullQ;
-            rot3 = NullQ;
-
-            return false;
+           
         }
 
 
@@ -235,7 +245,10 @@ namespace RobotController
             return (degree * (Math.PI / 180));
         }
 
-
+        internal float lerp(float a, float b, float f)
+        {
+            return a + f * (b - a);
+        }
 
     }
 }
