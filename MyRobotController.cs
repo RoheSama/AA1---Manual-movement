@@ -175,7 +175,7 @@ namespace RobotController
         public static MyQuat GetSwing(MyQuat rot3)
         {
             //todo: change the return value for exercise 3
-            return NullQ;
+            return Multiply(Inverse(twistQuat), rot3);
 
         }
 
@@ -183,7 +183,7 @@ namespace RobotController
         public static MyQuat GetTwist(MyQuat rot3)
         {
             //todo: change the return value for exercise 3
-            return NullQ;
+            return Multiply(rot3, Inverse(swingQuat));
 
         }
 
@@ -212,7 +212,7 @@ namespace RobotController
             }
         }
 
-        internal MyQuat Multiply(MyQuat q1, MyQuat q2) {
+        internal static MyQuat Multiply(MyQuat q1, MyQuat q2) {
 
             MyQuat returnQuat = NullQ;
 
