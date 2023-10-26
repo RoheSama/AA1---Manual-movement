@@ -74,7 +74,7 @@ namespace RobotController
         public string Hi()
         {
 
-            string s = "hello world from my Robot Controller";
+            string s = "hello world from my Robot Controller - Roger Companys, Eva Portet";
             return s;
 
         }
