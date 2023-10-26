@@ -157,18 +157,28 @@ namespace RobotController
 
             if (counter <= 1)
             {
-                //todo: add your code here
+                rot0 = NullQ;
+                rot0 = Rotate(rot0, rotateAxis[0], (float)Radians(lerp(initiAngles[0], finalAngles[0], counter)));
+                rot1 = Rotate(rot0, rotateAxis[1], (float)Radians(lerp(initiAngles[1], finalAngles[1], counter)));
+                rot2 = Rotate(rot1, rotateAxis[2], (float)Radians(lerp(initiAngles[2], finalAngles[2], counter)));
 
+                swingQuat = Rotate(rot2, rotateAxis[3], (float)Radians(lerp(initiAngles[3], finalAngles[3], counter)));
+                twistQuat = Rotate(swingQuat, rotateAxis[4], (float)Radians(lerp(initiAngles[4], finalAngles[4], counter)));
 
+                rot3 = Multiply(twistQuat, swingQuat);
+
+                counter += 0.0025f;
+                return true;
             }
+            else
+            {
+                rot0 = NullQ;
+                rot1 = NullQ;
+                rot2 = NullQ;
+                rot3 = NullQ;
 
-            //todo: remove this once your code works.
-            rot0 = NullQ;
-            rot1 = NullQ;
-            rot2 = NullQ;
-            rot3 = NullQ;
-
-            return false;
+                return false;
+            }
         }
 
 
