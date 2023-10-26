@@ -36,6 +36,11 @@ namespace RobotController
         private float[] initiAngles;
         private MyVec[] rotateAxis;
 
+        private bool condition1;
+        private bool condition2;
+
+        private float counter;
+
         public MyRobotController()
         {
             initiAngles = new float[5];
@@ -89,12 +94,17 @@ namespace RobotController
         public bool PickStudAnim(out MyQuat rot0, out MyQuat rot1, out MyQuat rot2, out MyQuat rot3)
         {
 
-            bool myCondition = false;
-            //todo: add a check for your condition
+            condition2 = true;
+
+            if (condition1)
+            {
+                counter = 0;
+                condition1 = false;
+            }
 
 
 
-            if (myCondition)
+            if (counter <= 1)
             {
                 //todo: add your code here
                 rot0 = NullQ;
