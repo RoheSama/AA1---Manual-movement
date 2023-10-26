@@ -217,21 +217,36 @@ namespace RobotController
             return returnQuat;
         }
 
+        //internal MyQuat Rotate(MyQuat currentRotation, MyVec axis, float angle)
+        //{
+
+        //    float halfAngle = angle / 2;
+        //    float sinHalfAngle = (float)Math.Sin(halfAngle);
+        //    float cosHalfAngle = (float)Math.Cos(halfAngle);
+
+        //    MyQuat rotationQuat;
+        //    rotationQuat.x = axis.x * sinHalfAngle;
+        //    rotationQuat.y = axis.y * sinHalfAngle;
+        //    rotationQuat.z = axis.z * sinHalfAngle;
+        //    rotationQuat.w = cosHalfAngle;
+
+        //    return rotationQuat;
+
+        //}
+
         internal MyQuat Rotate(MyQuat currentRotation, MyVec axis, float angle)
         {
-
-            float halfAngle = angle / 2;
+            float halfAngle = angle / 2.0f;
             float sinHalfAngle = (float)Math.Sin(halfAngle);
             float cosHalfAngle = (float)Math.Cos(halfAngle);
 
-            MyQuat rotationQuat;
+            MyQuat rotationQuat;          
             rotationQuat.x = axis.x * sinHalfAngle;
             rotationQuat.y = axis.y * sinHalfAngle;
             rotationQuat.z = axis.z * sinHalfAngle;
             rotationQuat.w = cosHalfAngle;
 
-            return rotationQuat;
-
+            return Multiply(currentRotation, rotationQuat);
         }
 
 
