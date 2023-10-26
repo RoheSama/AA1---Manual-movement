@@ -143,12 +143,16 @@ namespace RobotController
         public bool PickStudAnimVertical(out MyQuat rot0, out MyQuat rot1, out MyQuat rot2, out MyQuat rot3)
         {
 
-            bool myCondition = false;
-            //todo: add a check for your condition
+            condition1 = true;
+
+            if (condition2)
+            {
+                counter = 0;
+                condition2 = false;
+            }
 
 
-
-            while (myCondition)
+            if (counter <= 1)
             {
                 //todo: add your code here
 
