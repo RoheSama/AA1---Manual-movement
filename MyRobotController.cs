@@ -38,6 +38,9 @@ namespace RobotController
 
         private float counter;
 
+        private static MyQuat twistQuat;
+        private static MyQuat swingQuat;
+
         public MyRobotController()
         {
             initiAngles = new float[5];
@@ -221,22 +224,6 @@ namespace RobotController
             return returnQuat;
         }
 
-        //internal MyQuat Rotate(MyQuat currentRotation, MyVec axis, float angle)
-        //{
-
-        //    float halfAngle = angle / 2;
-        //    float sinHalfAngle = (float)Math.Sin(halfAngle);
-        //    float cosHalfAngle = (float)Math.Cos(halfAngle);
-
-        //    MyQuat rotationQuat;
-        //    rotationQuat.x = axis.x * sinHalfAngle;
-        //    rotationQuat.y = axis.y * sinHalfAngle;
-        //    rotationQuat.z = axis.z * sinHalfAngle;
-        //    rotationQuat.w = cosHalfAngle;
-
-        //    return rotationQuat;
-
-        //}
 
         internal MyQuat Rotate(MyQuat currentRotation, MyVec axis, float angle)
         {
@@ -257,6 +244,24 @@ namespace RobotController
         //todo: add here all the functions needed
 
         #endregion
+
+
+        internal static MyQuat Inverse(MyQuat _quat)
+        {
+            float magnitudeSquared = _quat.x * _quat.x + _quat.y * _quat.y + _quat.z * _quat.z + _quat.w * _quat.w;
+
+            float num = 1f / magnitudeSquared;
+
+            MyQuat result = new MyQuat
+            {
+                x = -_quat.x * num,
+                y = -_quat.y * num,
+                z = -_quat.z * num,
+                w = _quat.w * num
+            };
+
+            return result;
+        }
 
 
         internal double Radians(double degree)
